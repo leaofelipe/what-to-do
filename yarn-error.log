@@ -1,0 +1,36 @@
+Arguments: 
+  /home/felipe/.nvm/versions/node/v10.1.0/bin/node /home/felipe/.nvm/versions/node/v10.1.0/bin/yarn init
+
+PATH: 
+  /home/felipe/bin:/home/felipe/.nvm/versions/node/v10.1.0/bin:/home/felipe/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/felipe/.yarn/bin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  10.1.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/home/felipe/.nvm/versions/node/v10.1.0/lib/node_modules/yarn/lib/cli.js:129516:13)
+      at Interface.emit (events.js:182:13)
+      at Interface._ttyWrite (readline.js:778:16)
+      at ReadStream.onkeypress (readline.js:163:10)
+      at ReadStream.emit (events.js:182:13)
+      at emitKeys (internal/readline.js:422:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1014:36)
+      at ReadStream.emit (events.js:182:13)
+      at addChunk (_stream_readable.js:277:12)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

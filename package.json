@@ -1,0 +1,12 @@
+{
+  "name": "what-to-do",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Felipe Leão <felipe@felipeleao.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "babel-preset-env": "1.5.2",
+    "babel-preset-react": "6.24.1"
+  }
+}
