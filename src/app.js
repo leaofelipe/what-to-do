@@ -1,12 +1,11 @@
 console.log('App.js is running.');
 
-var app = {
+const app = {
   name: 'What to do APP'
 };
+let restaurants = ['McDonalds', 'Subway'];
 
-var restaurants = ['McDonalds', 'Subway'];
-
-var template = (
+const template = (
   <div>
     <h1>{app.name}</h1>
     <p>{restaurants.length > 0 ? 'Options:' : 'No options.'}</p>
@@ -18,6 +17,6 @@ var template = (
   </div>
 );
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
 ReactDOM.render(template, appRoot);

@@ -5,7 +5,6 @@ console.log('App.js is running.');
 var app = {
   name: 'What to do APP'
 };
-
 var restaurants = ['McDonalds', 'Subway'];
 
 var template = React.createElement(
