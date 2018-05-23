@@ -19,6 +19,12 @@ var onFormSubmit = function onFormSubmit(e) {
   }
 };
 
+var onClearAll = function onClearAll(e) {
+  e.preventDefault();
+  app.options = [];
+  renderApp();
+};
+
 var appRoot = document.getElementById('app');
 var renderApp = function renderApp() {
   var template = React.createElement(
@@ -42,21 +48,21 @@ var renderApp = function renderApp() {
     React.createElement(
       'ol',
       null,
-      app.options[0] && React.createElement(
+      React.createElement(
         'li',
         null,
-        app.options[0]
+        'Item 1'
       ),
-      app.options[1] && React.createElement(
+      React.createElement(
         'li',
         null,
-        app.options[1]
-      ),
-      app.options[2] && React.createElement(
-        'li',
-        null,
-        app.options[2]
+        'Item 2'
       )
+    ),
+    app.options.length > 0 && React.createElement(
+      'button',
+      { onClick: onClearAll },
+      'Clear all Options'
     ),
     React.createElement(
       'form',

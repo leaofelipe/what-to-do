@@ -17,6 +17,12 @@ const onFormSubmit = (e) => {
   }
 };
 
+const onClearAll = (e) => {
+  e.preventDefault();
+  app.options = [];
+  renderApp();
+};
+
 const appRoot = document.getElementById('app');
 const renderApp = () => {
   const template = (
@@ -25,10 +31,12 @@ const renderApp = () => {
       <p>{app.options.length > 0 ? 'Options:' : 'No options.'}</p>
       <p>{app.options.length}</p>
       <ol>
-        {app.options[0] && <li>{app.options[0]}</li>}
-        {app.options[1] && <li>{app.options[1]}</li>}
-        {app.options[2] && <li>{app.options[2]}</li>}
+        <li>Item 1</li>
+        <li>Item 2</li>
       </ol>
+      {(app.options.length > 0) &&
+        <button onClick={onClearAll}>Clear all Options</button>
+      }
 
       <form onSubmit={onFormSubmit}>
         <input type="text" name="option" />
