@@ -1,60 +1,43 @@
 console.log('App.js is running.');
 
-let count = 0;
-const addOne = () => {
-  count++;
-  renderCounterApp();
-  console.log('+1');
-  /* count++; */
+const app = {
+  name: 'What to do APP',
+  options: []
 };
 
-const minusOne = () => {
-  count--;
-  renderCounterApp();
-  console.log('-1');
-};
+const onFormSubmit = (e) => {
+  e.preventDefault();
 
-const reset = () => {
-  count = 0;
-  renderCounterApp();
-  console.log('Reset.');
+  const option = e.target.elements.option.value;
+
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    renderApp();
+  }
 };
 
 const appRoot = document.getElementById('app');
-
-const renderCounterApp = () => {
- const templateTwo = (
+const renderApp = () => {
+  const template = (
     <div>
-      <h1>Count: {count}</h1>
-      <button onClick={addOne}>+1</button>
-      <button onClick={minusOne}>-1</button>
-      <button onClick={reset}>Reset</button>
+      <h1>{app.name}</h1>
+      <p>{app.options.length > 0 ? 'Options:' : 'No options.'}</p>
+      <p>{app.options.length}</p>
+      <ol>
+        {app.options[0] && <li>{app.options[0]}</li>}
+        {app.options[1] && <li>{app.options[1]}</li>}
+        {app.options[2] && <li>{app.options[2]}</li>}
+      </ol>
+
+      <form onSubmit={onFormSubmit}>
+        <input type="text" name="option" />
+        <button>Add Option</button>
+      </form>
     </div>
   );
 
-  ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
-
-/* const app = { */
-/*   name: 'What to do APP' */
-/* }; */
-/* let restaurants = ['McDonalds', 'Subway']; */
-
-/* const template = ( */
-/*   <div> */
-/*     <h1>{app.name}</h1> */
-/*     <p>{restaurants.length > 0 ? 'Options:' : 'No options.'}</p> */
-/*     <ol> */
-/*       {restaurants[0] && <li>{restaurants[0]}</li>} */
-/*       {restaurants[1] && <li>{restaurants[1]}</li>} */
-/*       {restaurants[2] && <li>{restaurants[2]}</li>} */
-/*     </ol> */
-/*   </div> */
-/* ); */
-
-/* const appRoot = document.getElementById('app'); */
-
-/* ReactDOM.render(template, appRoot); */
-
+renderApp();

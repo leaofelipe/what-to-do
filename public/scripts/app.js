@@ -2,77 +2,75 @@
 
 console.log('App.js is running.');
 
-var count = 0;
-var addOne = function addOne() {
-  count++;
-  renderCounterApp();
-  console.log('+1');
-  /* count++; */
+var app = {
+  name: 'What to do APP',
+  options: []
 };
 
-var minusOne = function minusOne() {
-  count--;
-  renderCounterApp();
-  console.log('-1');
-};
+var onFormSubmit = function onFormSubmit(e) {
+  e.preventDefault();
 
-var reset = function reset() {
-  count = 0;
-  renderCounterApp();
-  console.log('Reset.');
+  var option = e.target.elements.option.value;
+
+  if (option) {
+    app.options.push(option);
+    e.target.elements.option.value = '';
+    renderApp();
+  }
 };
 
 var appRoot = document.getElementById('app');
-
-var renderCounterApp = function renderCounterApp() {
-  var templateTwo = React.createElement(
+var renderApp = function renderApp() {
+  var template = React.createElement(
     'div',
     null,
     React.createElement(
       'h1',
       null,
-      'Count: ',
-      count
+      app.name
     ),
     React.createElement(
-      'button',
-      { onClick: addOne },
-      '+1'
+      'p',
+      null,
+      app.options.length > 0 ? 'Options:' : 'No options.'
     ),
     React.createElement(
-      'button',
-      { onClick: minusOne },
-      '-1'
+      'p',
+      null,
+      app.options.length
     ),
     React.createElement(
-      'button',
-      { onClick: reset },
-      'Reset'
+      'ol',
+      null,
+      app.options[0] && React.createElement(
+        'li',
+        null,
+        app.options[0]
+      ),
+      app.options[1] && React.createElement(
+        'li',
+        null,
+        app.options[1]
+      ),
+      app.options[2] && React.createElement(
+        'li',
+        null,
+        app.options[2]
+      )
+    ),
+    React.createElement(
+      'form',
+      { onSubmit: onFormSubmit },
+      React.createElement('input', { type: 'text', name: 'option' }),
+      React.createElement(
+        'button',
+        null,
+        'Add Option'
+      )
     )
   );
 
-  ReactDOM.render(templateTwo, appRoot);
+  ReactDOM.render(template, appRoot);
 };
 
-renderCounterApp();
-
-/* const app = { */
-/*   name: 'What to do APP' */
-/* }; */
-/* let restaurants = ['McDonalds', 'Subway']; */
-
-/* const template = ( */
-/*   <div> */
-/*     <h1>{app.name}</h1> */
-/*     <p>{restaurants.length > 0 ? 'Options:' : 'No options.'}</p> */
-/*     <ol> */
-/*       {restaurants[0] && <li>{restaurants[0]}</li>} */
-/*       {restaurants[1] && <li>{restaurants[1]}</li>} */
-/*       {restaurants[2] && <li>{restaurants[2]}</li>} */
-/*     </ol> */
-/*   </div> */
-/* ); */
-
-/* const appRoot = document.getElementById('app'); */
-
-/* ReactDOM.render(template, appRoot); */
+renderApp();
