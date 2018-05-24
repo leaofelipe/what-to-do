@@ -31,13 +31,13 @@ const renderApp = () => {
       <p>{app.options.length > 0 ? 'Options:' : 'No options.'}</p>
       <p>{app.options.length}</p>
       <ol>
-        <li>Item 1</li>
-        <li>Item 2</li>
+        {
+          app.options.map(option => <li key={option}>{option}</li>)
+        }
       </ol>
       {(app.options.length > 0) &&
         <button onClick={onClearAll}>Clear all Options</button>
       }
-
       <form onSubmit={onFormSubmit}>
         <input type="text" name="option" />
         <button>Add Option</button>

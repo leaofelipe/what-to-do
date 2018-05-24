@@ -48,16 +48,13 @@ var renderApp = function renderApp() {
     React.createElement(
       'ol',
       null,
-      React.createElement(
-        'li',
-        null,
-        'Item 1'
-      ),
-      React.createElement(
-        'li',
-        null,
-        'Item 2'
-      )
+      app.options.map(function (option) {
+        return React.createElement(
+          'li',
+          { key: option },
+          option
+        );
+      })
     ),
     app.options.length > 0 && React.createElement(
       'button',
