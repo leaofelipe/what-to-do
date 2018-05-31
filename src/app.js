@@ -1,57 +1,67 @@
-console.log('App.js is running.');
-
-const app = {
-  name: 'What to do APP',
-  options: []
-};
-
-const onFormSubmit = (e) => {
-  e.preventDefault();
-
-  const option = e.target.elements.option.value;
-
-  if (option) {
-    app.options.push(option);
-    e.target.elements.option.value = '';
-    renderApp();
+class App extends React.Component {
+  render () {
+    return (
+      <div>
+        <Header />
+        <Action />
+        <Options />
+        <AddOption />
+      </div>
+    )
   }
-};
+}
 
-const onMakeDecision = () => {
-  const randomNum = Math.floor(Math.random() * app.options.length);
-  const option = app.options[randomNum];
-  alert(option);
-};
+class Header extends React.Component {
+  // REQUIRED
+  render () {
+    return (
+      <div>
+        <h1>What to do</h1>
+        <h2>What should I do?</h2>
+      </div>
+    )
+  }
+}
 
-const onClearAll = (e) => {
-  e.preventDefault();
-  app.options = [];
-  renderApp();
-};
+class Action extends React.Component {
+  render () {
+    return (
+      <div>
+        <button>What should I do?</button>
+      </div>
+    )
+  }
+}
 
-const appRoot = document.getElementById('app');
-const renderApp = () => {
-  const template = (
-    <div>
-      <h1>{app.name}</h1>
-      <p>{app.options.length > 0 ? 'Options:' : 'No options.'}</p>
-      <button onClick={onMakeDecision} disabled={!app.options.length}>What should I do?</button>
-      <ol>
-        {
-          app.options.map(option => <li key={option}>{option}</li>)
-        }
-      </ol>
-      {(app.options.length > 0) &&
-        <button onClick={onClearAll}>Clear all Options</button>
-      }
-      <form onSubmit={onFormSubmit}>
-        <input type="text" name="option" />
-        <button>Add Option</button>
-      </form>
-    </div>
-  );
+class Options extends React.Component {
+  render () {
+    return (
+      <div>
+        OPTIONS
+        <Option />
+      </div>
+    )
+  }
+}
 
-  ReactDOM.render(template, appRoot);
-};
+class Option extends React.Component {
+  render () {
+    return (
+      <div>
+        OPTION COMP
+      </div>
+    )
+  }
+}
 
-renderApp();
+class AddOption extends React.Component {
+  render () {
+    return (
+      <div>
+        ADD OPTIONS
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'))
