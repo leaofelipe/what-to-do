@@ -4,6 +4,7 @@ class App extends React.Component {
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
     this.handlePick = this.handlePick.bind(this)
     this.handleAddOption = this.handleAddOption.bind(this)
+    this.handleDeleteSingleOption = this.handleDeleteSingleOption.bind(this)
     this.state = {
       options: props.options
     }
@@ -26,6 +27,12 @@ class App extends React.Component {
     this.setState(() => ({options: []}))
   }
 
+  handleDeleteSingleOption (optionToRemove) {
+    this.setState((prevState) => ({
+      options: prevState.options.filter(option => option !== optionToRemove)
+    }))
+  }
+
   handlePick () {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
@@ -45,6 +52,7 @@ class App extends React.Component {
         <Options
           options={this.state.options}
           handleDeleteOptions={this.handleDeleteOptions}
+          handleDeleteSingleOption={this.handleDeleteSingleOption}
         />
         <AddOption
         handleAddOption={this.handleAddOption} />
@@ -88,8 +96,12 @@ const Options = (props) => {
   return (
     <div>
       <button onClick={props.handleDeleteOptions}>Remove All</button>
-      {props.options.map(option => <Option key={option} optionText={option} />)}
-      <Option />
+      {props.options.map(option => (
+        <Option
+        handleDeleteSingleOption={props.handleDeleteSingleOption}
+        key={option} optionText={option}
+        />
+      ))}
     </div>
   )
 }
@@ -98,6 +110,12 @@ const Option = (props) => {
   return (
     <div>
       {props.optionText}
+      <button
+        onClick={(e) => {
+          props.handleDeleteSingleOption(props.optionText)
+        }}>
+        remove
+      </button>
     </div>
   )
 }
