@@ -16,19 +16,14 @@ class App extends React.Component {
       return 'This option already exists'
     }
 
-    this.setState((prevState) => {
-      return {
-        options: prevState.options.concat(option)
-      }
-    })
+    this.setState((prevState) => ({
+      options: prevState.options.concat(option)
+    }))
   }
 
   handleDeleteOptions () {
-    this.setState(() => {
-      return {
-        options: []
-      }
-    })
+    // Shorthand arrow function return
+    this.setState(() => ({options: []}))
   }
 
   handlePick () {
@@ -119,12 +114,9 @@ class AddOption extends React.Component {
   handleAddOption (e) {
     e.preventDefault()
     const option = e.target.elements.option.value.trim()
-
     const error = this.props.handleAddOption(option)
     
-    this.setState(() => {
-      return { error }
-    })
+    this.setState(() => ({error}))
   }
 
   render () {

@@ -43,10 +43,9 @@ var App = function (_React$Component) {
   }, {
     key: 'handleDeleteOptions',
     value: function handleDeleteOptions() {
+      // Shorthand arrow function return
       this.setState(function () {
-        return {
-          options: []
-        };
+        return { options: [] };
       });
     }
   }, {
@@ -165,7 +164,6 @@ var AddOption = function (_React$Component2) {
     value: function handleAddOption(e) {
       e.preventDefault();
       var option = e.target.elements.option.value.trim();
-
       var error = this.props.handleAddOption(option);
 
       this.setState(function () {
