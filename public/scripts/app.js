@@ -21,12 +21,32 @@ var App = function (_React$Component) {
     _this.handleAddOption = _this.handleAddOption.bind(_this);
     _this.handleDeleteSingleOption = _this.handleDeleteSingleOption.bind(_this);
     _this.state = {
-      options: props.options
+      options: []
     };
     return _this;
   }
 
   _createClass(App, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      try {
+        var json = localStorage.getItem('options');
+        var options = JSON.parse(json);
+
+        if (options) this.setState(function () {
+          return { options: options };
+        });
+      } catch (e) {}
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem('options', json);
+      }
+    }
+  }, {
     key: 'handleAddOption',
     value: function handleAddOption(option) {
       if (!option) {
@@ -94,10 +114,6 @@ var App = function (_React$Component) {
   return App;
 }(React.Component);
 
-App.defaultProps = {
-  options: []
-};
-
 var Header = function Header(props) {
   return React.createElement(
     'div',
@@ -141,6 +157,11 @@ var Options = function Options(props) {
       'button',
       { onClick: props.handleDeleteOptions },
       'Remove All'
+    ),
+    !props.options.length && React.createElement(
+      'p',
+      null,
+      'Add an option'
     ),
     props.options.map(function (option) {
       return React.createElement(Option, {
@@ -192,6 +213,7 @@ var AddOption = function (_React$Component2) {
       this.setState(function () {
         return { error: error };
       });
+      if (!error) e.target.elements.option.value = '';
     }
   }, {
     key: 'render',

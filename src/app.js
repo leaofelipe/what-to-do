@@ -6,7 +6,25 @@ class App extends React.Component {
     this.handleAddOption = this.handleAddOption.bind(this)
     this.handleDeleteSingleOption = this.handleDeleteSingleOption.bind(this)
     this.state = {
-      options: props.options
+      options: []
+    }
+  }
+
+  componentDidMount () {
+    try {
+      const json = localStorage.getItem('options')
+      const options = JSON.parse(json)
+
+      if (options) this.setState(() => ({options}))
+    } catch(e) {
+    
+    }
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options)
+      localStorage.setItem('options', json)
     }
   }
 
@@ -61,12 +79,6 @@ class App extends React.Component {
   }
 }
 
-App.defaultProps = {
-  options: []
-}
-
-
-
 const Header = (props) => {
   return (
     <div>
@@ -96,6 +108,7 @@ const Options = (props) => {
   return (
     <div>
       <button onClick={props.handleDeleteOptions}>Remove All</button>
+      {!props.options.length && <p>Add an option</p>}
       {props.options.map(option => (
         <Option
         handleDeleteSingleOption={props.handleDeleteSingleOption}
@@ -135,6 +148,7 @@ class AddOption extends React.Component {
     const error = this.props.handleAddOption(option)
     
     this.setState(() => ({error}))
+    if (!error) e.target.elements.option.value = ''
   }
 
   render () {
