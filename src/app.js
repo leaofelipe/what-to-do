@@ -59,63 +59,43 @@ class App extends React.Component {
   }
 }
 
-class Header extends React.Component {
-  // REQUIRED
-  render () {
-    return (
-      <div>
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.subtitle}</h2>
-      </div>
-    )
-  }
+const Header = (props) => {
+  return (
+    <div>
+      <h1>{props.title}</h1>
+      <h2>{props.subtitle}</h2>
+    </div>
+  )
 }
 
-class Action extends React.Component {
-  constructor (props) {
-    super(props)
-  }
-
-  render () {
-    return (
-      <div>
-        <button
-          disabled={!this.props.hasOptions}
-          onClick={this.props.handlePick}>What should I do?</button>
-      </div>
-    )
-  }
+const Action = (props) => {
+  return (
+    <div>
+      <button
+      disabled={!props.hasOptions}
+      onClick={props.handlePick}>
+        What should I do?
+      </button>
+    </div>
+  )
 }
 
-class Options extends React.Component {
-  constructor (props) {
-    super(props)
-    this.removeAll = this.removeAll.bind(this)
-  }
-
-  removeAll () {
-    console.log(this.props);
-  }
-
-  render () {
-    return (
-      <div>
-        <button onClick={this.props.handleDeleteOptions}>Remove All</button>
-        {this.props.options.map(option => <Option key={option} optionText={option} />)}
-        <Option />
-      </div>
-    )
-  }
+const Options = (props) => {
+  return (
+    <div>
+      <button onClick={props.handleDeleteOptions}>Remove All</button>
+      {props.options.map(option => <Option key={option} optionText={option} />)}
+      <Option />
+    </div>
+  )
 }
 
-class Option extends React.Component {
-  render () {
-    return (
-      <div>
-        {this.props.optionText}
-      </div>
-    )
-  }
+const Option = (props) => {
+  return (
+    <div>
+      {props.optionText}
+    </div>
+  )
 }
 
 class AddOption extends React.Component {
