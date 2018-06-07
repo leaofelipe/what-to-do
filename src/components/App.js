@@ -5,15 +5,8 @@ import Header from './Header'
 import Action from './Action'
 
 export default class App extends React.Component {
-  constructor (props) {
-    super(props)
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
-    this.handlePick = this.handlePick.bind(this)
-    this.handleAddOption = this.handleAddOption.bind(this)
-    this.handleDeleteSingleOption = this.handleDeleteSingleOption.bind(this)
-    this.state = {
-      options: []
-    }
+  state = {
+    options: []
   }
 
   componentDidMount () {
@@ -34,7 +27,7 @@ export default class App extends React.Component {
     }
   }
 
-  handleAddOption (option) {
+  handleAddOption = (option) => {
     if (!option) {
       return 'Enter a valid item'
     } else if (this.state.options.indexOf(option) > -1) {
@@ -46,18 +39,18 @@ export default class App extends React.Component {
     }))
   }
 
-  handleDeleteOptions () {
+  handleDeleteOptions = () => {
     // Shorthand arrow function return
     this.setState(() => ({options: []}))
   }
 
-  handleDeleteSingleOption (optionToRemove) {
+  handleDeleteSingleOption = (optionToRemove) => {
     this.setState((prevState) => ({
       options: prevState.options.filter(option => option !== optionToRemove)
     }))
   }
 
-  handlePick () {
+  handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
     alert(option);
