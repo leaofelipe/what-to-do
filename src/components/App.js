@@ -3,10 +3,12 @@ import AddOption from './AddOption'
 import Options from './Options'
 import Header from './Header'
 import Action from './Action'
+import OptionModal from './OptionModal'
 
 export default class App extends React.Component {
   state = {
-    options: []
+    options: [],
+    selectedOption: undefined
   }
 
   componentDidMount () {
@@ -25,6 +27,10 @@ export default class App extends React.Component {
       const json = JSON.stringify(this.state.options)
       localStorage.setItem('options', json)
     }
+  }
+
+  handleClearSelectedOption = () => {
+    this.setState(() => ({selectedOption: undefined}))
   }
 
   handleAddOption = (option) => {
@@ -53,7 +59,7 @@ export default class App extends React.Component {
   handlePick = () => {
     const randomNum = Math.floor(Math.random() * this.state.options.length);
     const option = this.state.options[randomNum];
-    alert(option);
+    this.setState(() => ({selectedOption: option}))
   }
 
   render () {
@@ -73,6 +79,10 @@ export default class App extends React.Component {
         />
         <AddOption
         handleAddOption={this.handleAddOption} />
+        <OptionModal
+          selectedOption={this.state.selectedOption}
+          handleClearSelectedOption={this.handleClearSelectedOption}
+        />
       </div>
     )
   }
