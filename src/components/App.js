@@ -1,4 +1,10 @@
-class App extends React.Component {
+import React from 'react'
+import AddOption from './AddOption'
+import Options from './Options'
+import Header from './Header'
+import Action from './Action'
+
+export default class App extends React.Component {
   constructor (props) {
     super(props)
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this)
@@ -78,90 +84,3 @@ class App extends React.Component {
     )
   }
 }
-
-const Header = (props) => {
-  return (
-    <div>
-      <h1>{props.title}</h1>
-      {props.subtitle && <h2>{props.subtitle}</h2>}
-    </div>
-  )
-}
-
-Header.defaultProps = {
-  title: 'What to do APP'
-}
-
-const Action = (props) => {
-  return (
-    <div>
-      <button
-      disabled={!props.hasOptions}
-      onClick={props.handlePick}>
-        What should I do?
-      </button>
-    </div>
-  )
-}
-
-const Options = (props) => {
-  return (
-    <div>
-      <button onClick={props.handleDeleteOptions}>Remove All</button>
-      {!props.options.length && <p>Add an option</p>}
-      {props.options.map(option => (
-        <Option
-        handleDeleteSingleOption={props.handleDeleteSingleOption}
-        key={option} optionText={option}
-        />
-      ))}
-    </div>
-  )
-}
-
-const Option = (props) => {
-  return (
-    <div>
-      {props.optionText}
-      <button
-        onClick={(e) => {
-          props.handleDeleteSingleOption(props.optionText)
-        }}>
-        remove
-      </button>
-    </div>
-  )
-}
-
-class AddOption extends React.Component {
-  constructor (props) {
-    super(props) 
-    this.handleAddOption = this.handleAddOption.bind(this)
-    this.state = {
-      error: undefined
-    }
-  }
-
-  handleAddOption (e) {
-    e.preventDefault()
-    const option = e.target.elements.option.value.trim()
-    const error = this.props.handleAddOption(option)
-    
-    this.setState(() => ({error}))
-    if (!error) e.target.elements.option.value = ''
-  }
-
-  render () {
-    return (
-      <div>
-        {this.state.error && <p>Error: {this.state.error}</p>}
-        <form onSubmit={this.handleAddOption}>
-          <input type="text" name="option" />
-          <button>Add Option</button>
-        </form>
-      </div>
-    )
-  }
-}
-
-ReactDOM.render(<App />, document.getElementById('app'))
