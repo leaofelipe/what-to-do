@@ -73,13 +73,16 @@ export default class App extends React.Component {
             hasOptions={this.state.options.length > 0}
             handlePick={this.handlePick}
           />
-          <Options
-            options={this.state.options}
-            handleDeleteOptions={this.handleDeleteOptions}
-            handleDeleteSingleOption={this.handleDeleteSingleOption}
-          />
-          <AddOption
-          handleAddOption={this.handleAddOption} />
+
+          <div className="widget">
+            <Options
+              options={this.state.options}
+              handleDeleteOptions={this.handleDeleteOptions}
+              handleDeleteSingleOption={this.handleDeleteSingleOption}
+            />
+            <AddOption
+            handleAddOption={this.handleAddOption} />
+          </div>
           <OptionModal
             selectedOption={this.state.selectedOption}
             handleClearSelectedOption={this.handleClearSelectedOption}
