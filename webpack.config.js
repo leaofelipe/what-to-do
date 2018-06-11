@@ -12,7 +12,8 @@ module.exports = {
       test: /\.js$/,
       exclude: /node_modules/
     }, {
-      test: /\.scss$/,
+      // Support for CSS and SCSS files
+      test: /\.s?css$/,
       use: [
         'style-loader',
         'css-loader',
